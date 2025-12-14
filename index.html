@@ -6,12 +6,34 @@
     <title>Odin JS Examples</title>
 </head>
 <body>
-    
+    <div id="menu">
+        <button id="add">Add a New Book</button>
+        <button id="load">Load Library</button>
+    </div>
+    <dialog id="add-book" closed>
+        <p>Input Book Details Below</p>
+        <form method="dialog">
+            <fieldset>
+                <label>Book Name</label>
+                <input type="text">
+                <label>Author</label>
+                <input type="text">
+                <label>Number of Pages</label>
+                <input type="number">
+                <label>Read?</label>
+                <input type="radio" id="true" name='read' value="true" checked />
+                <label>True</label>
+                <input type="radio" id="false" name="read" value="false" />
+                <label>False</label>
+            </fieldset>
+            <button onclick="">Add Book</button>
+            <button>Cancel</button>
+        </form>
+    </dialog>
+    <div id="bookshelf">
+        <!--js will load 'books' here-->
+    </div>
 
-    <script src="./script.js"></script>
-    <script>
-        const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
-        console.log(theHobbit.info());
-    </script>
+    <script src="./script.js" type="module"></script>
 </body>
 </html>
