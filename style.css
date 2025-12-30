@@ -1,21 +1,34 @@
 :root{
     margin: 0;
-    background-color: burlywood;
+    background-color: rgb(36, 21, 1);
+    color: white;
+    text-align: center;
+    font-family: Garamond, serif;
 }
 
-.bookshelf {
+#bookshelf {
     display: flex;
     flex-direction: row;
-    outline: auto;
+    border: solid black 2px;
+    background-color: rgb(58, 34, 2);
+}
+
+#menu {
+    display: flex;
+    background-color: rgb(69, 43, 4);
+    padding: 10px;
+    justify-content: space-around;
 }
 
 .book {
     width: 100px;
-    background-color: aliceblue;
+    background-color: rgb(67, 23, 7);
+    color: silver;
     border: solid black 2px;
     border-radius: 10px;
     padding: 5px;
     margin: 10px;
+    box-shadow: inset 0 0 10px black;
 }
 
 .book h2 {

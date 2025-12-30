@@ -77,21 +77,39 @@ function updateBookshelf(){
         bookAuthorText.innerText = `by ${myLibrary[i].author}`;
         let bookPagesText = document.createElement('p');
         bookPagesText.innerText = `${myLibrary[i].pages} pages`;
-        let bookReadText = document.createElement('p');
-        bookReadText.innerText = `Read? ${myLibrary[i].isRead}`
         book.appendChild(bookTitleText);
         book.appendChild(bookAuthorText);
         book.appendChild(bookPagesText);
-        book.appendChild(bookReadText);
         bookshelf.appendChild(book);
+
+        if(myLibrary[i].isRead){
+            let readStatus = document.createElement('p');
+            readStatus.innerText = "Read";
+            book.appendChild(readStatus);
+            book.style.backgroundColor = "white";
+            book.style.color = "black";
+            let toggleReadButton = document.createElement('button');
+            toggleReadButton.innerText = "Toggle Read Status";
+            book.appendChild(toggleReadButton);
+        } else {
+            let readStatus = document.createElement('p');
+            readStatus.innerText = "Not Read";
+            book.appendChild(readStatus);
+            book.style.backgroundColor = "lightgreen";
+            book.style.color = "black";
+            let toggleReadButton = document.createElement('button');
+            toggleReadButton.innerText = "Toggle Read Status";
+            book.appendChild(toggleReadButton);
+        }
     }
 }
 
 function addSampleBooks(){
-    console.log("Adding 3 sample books...")
-    addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
-    addBookToLibrary("Dune", "Frank Herbert", 305, false);
+    console.log("Adding 4 sample books...")
+    addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
+    addBookToLibrary("Dune", "Frank Herbert", 305, true);
     addBookToLibrary("Armada", "Ernest Cline", 402, true);
+    addBookToLibrary("Brave New World", "Aldous Huxley", 268, false);   
 }
 
 function openDialog(dialogId){
