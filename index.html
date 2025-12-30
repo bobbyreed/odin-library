@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin JS Examples</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <div id="menu">
         <button id="add">Add a New Book</button>
         <button id="load">Load Library</button>
+        <button id="update">Update Library</button>
     </div>
     <dialog id="add-book" closed>
         <p>Input Book Details Below</p>
         <form method="dialog">
             <fieldset>
                 <label>Book Name</label>
-                <input type="text">
+                <input type="text" id="name-input">
                 <label>Author</label>
-                <input type="text">
+                <input type="text" id="author-input">
                 <label>Number of Pages</label>
-                <input type="number">
+                <input type="number" id="page-input">
                 <label>Read?</label>
-                <input type="radio" id="true" name='read' value="true" checked />
+                <input type="radio" id="true-input" name='read' value="true" checked />
                 <label>True</label>
-                <input type="radio" id="false" name="read" value="false" />
+                <input type="radio" id="false-input" name="read" value="false" />
                 <label>False</label>
             </fieldset>
-            <button onclick="">Add Book</button>
-            <button>Cancel</button>
+            <button id="submit">Add Book</button>
+            <button id="cancel">Cancel</button>
         </form>
     </dialog>
     <div id="bookshelf">

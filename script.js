@@ -5,10 +5,32 @@ addBookButton.addEventListener('click', () =>{
     openDialog('add-book');
 });
 
+const updateButton = document.getElementById('update');
+updateButton.addEventListener('click', () =>{
+    updateBookshelf();
+});
+
 const loadLibraryButton = document.getElementById('load');
 loadLibraryButton.addEventListener('click', () => {
     alert('Load Library Functionality Coming Soon...')
 });
+
+//dialog buttons
+const addBookSubmitButton = document.getElementById('submit');
+addBookSubmitButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    let title = document.getElementById('name-input');
+    let author = document.getElementById('author-input');
+    let pages = document.getElementById('page-input');
+    let isRead = document.getElementsByName('read');
+    console.log(`Adding ${title.value} by ${author.value}...`)
+    addBookToLibrary(title.value, author.value, pages.value, isRead.value);
+    clearDialogInputs('add-book');
+    const dialog = document.getElementById('add-book');
+    dialog.close();
+});
+
+
 
 function Book(title, author, pages, isRead){
     if(!new.target){
@@ -27,16 +49,27 @@ function Book(title, author, pages, isRead){
 function addBookToLibrary(title, author, pages, isRead){
     const book = new Book(title, author, pages, isRead);
     myLibrary.push(book);
+    updateBookshelf();
 }
 
 export function createBookObjects(myLibrary){
     if(myLibrary.length <= 0){
+        console.log("No books found.")
         addSampleBooks();
     }
     const bookshelf = document.getElementById('bookshelf');
     //create books out of array of objects
+    updateBookshelf();
+}
+
+
+function updateBookshelf(){
+    const bookshelf = document.getElementById('bookshelf');
+    bookshelf.innerHTML = "";
+    //create books out of array of objects
     for(let i = 0; i < myLibrary.length; i++){
         let book = document.createElement('div');
+        book.setAttribute('class', 'book');
         book.id = `${myLibrary[i].title.toLowerCase().replaceAll(" ", "-")}`;
         let bookTitleText = document.createElement('h2');
         bookTitleText.innerText = myLibrary[i].title;
@@ -52,10 +85,10 @@ export function createBookObjects(myLibrary){
         book.appendChild(bookReadText);
         bookshelf.appendChild(book);
     }
-    //append books to bookshelf
 }
 
 function addSampleBooks(){
+    console.log("Adding 3 sample books...")
     addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
     addBookToLibrary("Dune", "Frank Herbert", 305, false);
     addBookToLibrary("Armada", "Ernest Cline", 402, true);
@@ -64,6 +97,14 @@ function addSampleBooks(){
 function openDialog(dialogId){
     const dialog = document.getElementById(dialogId);
     dialog.show();
+}
+
+function clearDialogInputs(dialogId){
+    const dialog = document.getElementById(dialogId);
+    const inputs = dialog.getElementsByTagName('input');
+    for(let i = 0; i < inputs.length; i++){
+        inputs[i].value = "";
+    }
 }
 
 createBookObjects(myLibrary);
