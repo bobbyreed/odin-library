@@ -77,32 +77,53 @@ function updateBookshelf(){
         bookAuthorText.innerText = `by ${myLibrary[i].author}`;
         let bookPagesText = document.createElement('p');
         bookPagesText.innerText = `${myLibrary[i].pages} pages`;
+        
+        let toggleReadButton = document.createElement('button');
+        toggleReadButton.innerText = "Toggle Read Status";
+        toggleReadButton.addEventListener('click', () => {
+            toggleReadStatus(myLibrary[i].title);
+        });
+        
+        let deleteButton = document.createElement('button');
+        deleteButton.innerText = "Delete Book";
+        deleteButton.addEventListener('click', () => {
+            deleteBookfromLibrary(myLibrary[i].title);
+        });
+        
         book.appendChild(bookTitleText);
         book.appendChild(bookAuthorText);
         book.appendChild(bookPagesText);
+        book.appendChild(toggleReadButton);
+        book.appendChild(deleteButton);
         bookshelf.appendChild(book);
-
         if(myLibrary[i].isRead){
             let readStatus = document.createElement('p');
             readStatus.innerText = "Read";
             book.appendChild(readStatus);
             book.style.backgroundColor = "white";
             book.style.color = "black";
-            let toggleReadButton = document.createElement('button');
-            toggleReadButton.innerText = "Toggle Read Status";
-            book.appendChild(toggleReadButton);
         } else {
             let readStatus = document.createElement('p');
             readStatus.innerText = "Not Read";
             book.appendChild(readStatus);
             book.style.backgroundColor = "lightgreen";
             book.style.color = "black";
-            let toggleReadButton = document.createElement('button');
-            toggleReadButton.innerText = "Toggle Read Status";
-            book.appendChild(toggleReadButton);
         }
+        
+
+        
     }
 }
+
+function toggleReadStatus(bookTitle){
+    for(let i = 0; i < myLibrary.length; i++){
+        if(myLibrary[i].title === bookTitle){
+            myLibrary[i].isRead = !myLibrary[i].isRead;
+            console.log(`Toggled read status for ${bookTitle} to ${myLibrary[i].isRead}`);
+            updateBookshelf();
+            return;
+        }
+    }}
 
 function addSampleBooks(){
     console.log("Adding 4 sample books...")
@@ -124,5 +145,15 @@ function clearDialogInputs(dialogId){
         inputs[i].value = "";
     }
 }
+
+function deleteBookfromLibrary(bookTitle){
+    for(let i = 0; i < myLibrary.length; i++){
+        if(myLibrary[i].title === bookTitle){
+            myLibrary.splice(i, 1);
+            console.log(`Deleted ${bookTitle} from library.`);
+            updateBookshelf();
+            return;
+        }
+}}
 
 createBookObjects(myLibrary);
