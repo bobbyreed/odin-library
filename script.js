@@ -32,22 +32,22 @@ addBookSubmitButton.addEventListener('click', (event) => {
 
 
 
-function Book(title, author, pages, isRead){
-    if(!new.target){
-        throw Error("You must use the 'new' operator to call the constructor");
-    }
-
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-    this.info = function() {
+class Book{
+    constructor(title, author, pages, isRead){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+        this.info = function() {
         return `${title} by ${author}, ${pages} pages, `;
     }
+    }
+    
+    
 }
 
 function addBookToLibrary(title, author, pages, isRead){
-    const book = new Book(title, author, pages, isRead);
+    let book = new Book(title, author, pages, isRead);
     myLibrary.push(book);
     updateBookshelf();
 }
